@@ -1,0 +1,23 @@
+---
+- name: Update System & Install LEMP Stack 
+  hosts: all    
+  tasks:
+       - name: Update & Reboot
+         include: ./tasks/update.yml
+       - name: Install Repository Nginx,PHP7.4,Mariadb 10.4
+         include: ./tasks/repo.yml
+       - name: Install LEMP Stack
+         include: ./tasks/lemp.yml
+       - name: Start and Enable All Service of Lemp Stack
+         include: ./tasks/service.yml
+       - name: Config LEMP Stack
+         vars:
+             mysql_root_password: "Hoangviet88vn"         
+         include: ./tasks/configlemp.yml
+
+
+         
+
+                
+         
+

@@ -1,0 +1,7 @@
+         - name: Run Yum Update
+           yum:
+               name: "*"
+               state: latest
+         - name: Reboot System
+           reboot:
+               reboot_timeout: 3600

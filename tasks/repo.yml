@@ -1,0 +1,27 @@
+         - name: Install Epel-Release
+           yum:
+                name: epel-release
+         - name: Install Yum-utils
+           yum:
+                name: yum-utils
+                state: latest
+         - name:  Add Repository Nginx
+           copy:
+                src: ./repo/nginx.repo
+                dest: /etc/yum.repos.d/
+                owner: root
+                group: root
+         - name:  Add Repository MariaDB
+           copy:
+                src: ./repo/MariaDB.repo
+                dest: /etc/yum.repos.d/
+                owner: root
+                group: root
+         - name: Install Remi Repo
+           yum:
+                name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+                state: present
+         - name: Enable Module REMI7.4
+           shell: dnf module enable php:remi-7.4 -y
+           
+         

@@ -1,0 +1,45 @@
+         ######### LINK PHP-FPM TO NGINX ###############
+        - name: Replace User in www.conf is nginx
+          replace:
+            path: /etc/php-fpm.d/www.conf
+            regexp: 'user = apache'
+            replace: "user = nginx"
+        - name: Replace Group in www.conf is nginx
+          replace:
+            path: /etc/php-fpm.d/www.conf
+            regexp: 'group = apache'
+            replace: "group = nginx"
+            
+        ########### MYSQL_SECURE_INSTALLATION ############
+        - name: mysql_secure_installation
+          shell: mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{ mysql_root_password }}'; DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1'); DELETE FROM mysql.user WHERE User=''; FLUSH PRIVILEGES;"     
+
+        ##############   FIREWALL CONFIG #######################
+        - name: Open Port HTTP
+          firewalld:
+              zone: public
+              service: http
+              permanent: yes
+              state: enabled
+        - name: Open Port HTTPS
+          firewalld:
+              zone: public
+              service: https
+              permanent: yes
+              state: enabled
+        - name: Reload Firewall
+          service:
+              name: firewall-cmd
+              state: restarted
+       ########## restart all service #######################
+        - name: Restart All Service
+          shell: systemctl restart nginx php-fpm mariadb
+
+        
+          
+        
+          
+  
+  
+
+   

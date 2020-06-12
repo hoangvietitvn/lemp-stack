@@ -1,0 +1,18 @@
+            - name: Install Nginx
+              yum:
+                  name: nginx 
+                  state: latest
+            - name: Install PHP 7.4
+              yum:
+                  name: php,php-fpm,php-common,php-xml,php-xmlrpc,php-mysqlnd,php-gd,php-memcached,php-opcache,php-dba,php-pecl-zip
+                  state: latest
+            - name: Install boost-program-options for MariaDB
+              yum:
+                  name: boost-program-options
+                  state: latest
+            - name: Install MariaDB
+              yum:
+                  name: MariaDB-server,MariaDB-client
+                  disablerepo: AppStream
+                  state: latest
+            

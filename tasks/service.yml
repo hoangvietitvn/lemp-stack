@@ -1,0 +1,16 @@
+        - name: Start Nginx
+          service:
+                  name: nginx 
+                  state: started
+                  enabled: yes
+        - name: Start PHP-FPM
+          service:
+                  name: php-fpm
+                  state: started
+                  enabled: yes 
+        - name: Start MariaDB
+          service:
+                  name: mariadb
+                  state: started
+                  enabled: yes 
+        
